@@ -38,14 +38,14 @@ export default function RangoPage() {
 
               {/* Text content */}
               <div className="text-center space-y-4">
-                <p className="text-cyan-300 text-2xl font-bold">Sigue consiguiendo merch!</p>
+                <p className="text-cyan-300 text-2xl font-bold">Keep collecting merch!</p>
 
                 <p className="text-cyan-300 text-xl font-semibold">
-                  Consigue más items y llega a:
+                  Get more items and reach:
                   <br />
-                  <span className="text-2xl">COLECCIONISTA</span>
+                  <span className="text-2xl">COLLECTOR</span>
                   <br />
-                  <span className="text-2xl">INICIADO</span>
+                  <span className="text-2xl">BEGINNER</span>
                 </p>
               </div>
 
@@ -58,7 +58,7 @@ export default function RangoPage() {
                     clipPath: "polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px)",
                   }}
                 >
-                  Consigue más merch ahora
+                  Get more merch now
                 </Link>
               </div>
             </div>

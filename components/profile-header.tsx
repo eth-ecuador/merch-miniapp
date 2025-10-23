@@ -31,7 +31,7 @@ export function ProfileHeader() {
           {isLoading ? "Cargando..." : resolvedName}
         </h1>
         <p className="text-lg text-white/90 uppercase tracking-wide">
-          Novato del Merch
+          Merch Newbie
         </p>
         {address && (
           <div className="mt-2 bg-black/30 rounded-md px-2 py-1 border border-[#c8ff00]/30">

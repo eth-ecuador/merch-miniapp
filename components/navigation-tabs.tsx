@@ -16,7 +16,7 @@ export function NavigationTabs() {
         }`}
       >
         <Bookmark className="w-6 h-6" fill={pathname === "/colection" ? "#c8ff00" : "none"} />
-        <span>Mi colección</span>
+        <span>My collection</span>
       </Link>
       <Link
         href="/premium"

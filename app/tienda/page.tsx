@@ -17,7 +17,7 @@ export default function TiendaPage() {
           <div className="w-full max-w-md">
             <FuturisticCard>
               <div className="text-center space-y-6 py-8 px-4">
-                <h2 className="text-4xl font-bold text-[#c8ff00] tracking-wider">LA MEJOR MERCH</h2>
+                <h2 className="text-4xl font-bold text-[#c8ff00] tracking-wider">THE BEST MERCH</h2>
 
                 <div className="w-full">
                   <div className="h-3 bg-blue-900/50 border-2 border-cyan-400 relative overflow-hidden">
@@ -26,9 +26,9 @@ export default function TiendaPage() {
                 </div>
 
                 <p className="text-cyan-300 text-xl font-semibold">
-                  Aumenta tu colección con
+                  Expand your collection with
                   <br />
-                  increíbles diseños
+                  amazing designs
                 </p>
               </div>
             </FuturisticCard>

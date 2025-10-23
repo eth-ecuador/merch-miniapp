@@ -73,7 +73,7 @@ export default function ProfilePage() {
               <h2 className="text-3xl font-bold text-white uppercase tracking-wide">
                 {isLoading ? 'Cargando...' : displayName || 'Anon User'}
               </h2>
-              <p className="text-xl text-white/90 uppercase tracking-wide">Novato del Merch</p>
+              <p className="text-xl text-white/90 uppercase tracking-wide">Merch Newbie</p>
               {username && (
                 <p className="text-lg text-white/70 tracking-wide">@{username}</p>
               )}
@@ -122,9 +122,9 @@ export default function ProfilePage() {
           </div>
 
           <p className="text-center text-[#00d4ff] text-lg font-bold uppercase tracking-wide px-4">
-            Consigue mas items y llega a:
+            Get more items and reach:
             <br />
-            <span className="text-xl">Coleccionista Iniciado</span>
+            <span className="text-xl">COLLECTOR MASTER</span>
           </p>
 
           <div className="absolute -bottom-8 -left-4 w-16 h-16 border-l-4 border-b-4 border-[#c8ff00]"></div>

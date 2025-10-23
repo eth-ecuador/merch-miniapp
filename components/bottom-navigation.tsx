@@ -26,7 +26,7 @@ export function BottomNavigation({ currentPath }: BottomNavigationProps) {
         }`}
       >
         <Diamond className="w-10 h-10" />
-        <span className="text-lg font-semibold">Rango</span>
+        <span className="text-lg font-semibold">Rank</span>
       </Link>
 
       <Link
@@ -36,7 +36,7 @@ export function BottomNavigation({ currentPath }: BottomNavigationProps) {
         }`}
       >
         <Store className="w-10 h-10" />
-        <span className="text-lg font-semibold">Tienda</span>
+        <span className="text-lg font-semibold">Claim</span>
       </Link>
 
       <Link
