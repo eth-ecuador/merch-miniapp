@@ -1,0 +1,47 @@
+{
+  "accountAssociation": {
+    "header": "eyJmaWQiOjEzNjQzNzAsInR5cGUiOiJjdXN0b2R5Iiwia2V5IjoiMHg3RDkwNzhCRWU2RDJBNTk3ODk3MDZiZjgxYjY0ODYzQTJhZThiM2NmIn0",
+    "payload": "eyJkb21haW4iOiJtZXJjaC1jb2xsZWN0aW9uLnZlcmNlbC5hcHAifQ",
+    "signature": "ZNieM94y1B0yEDatN7CWGmA3XkQgYo3vqRf8XiRBRg9HwNfNXazIZSmF9q7L/yaiRAoe6gTL8QROGfYF2bWmLBs="
+  },
+  "baseBuilder": {
+    "ownerAddress": "0x9072D4514dd0cFb37Ec98AFB8847125aD1f56dE6"
+  },
+  "miniapp": {
+    "version": "1",
+    "name": "Merch MVP",
+    "homeUrl": "https://merch-collection.vercel.app",
+    "iconUrl": "https://merch-collection.vercel.app/icon.png",
+    "splashImageUrl": "https://merch-collection.vercel.app/splash.svg",
+    "splashBackgroundColor": "#0052ff",
+    "webhookUrl": "https://merch-collection.vercel.app/api/webhook",
+    "subtitle": "SBT and Premium NFT System",
+    "description": "Claim event attendance SBTs and mint premium companion NFTs on Base. Built with signature-based validation for gasless transactions.",
+    "screenshotUrls": [
+      "https://merch-collection.vercel.app/screenshot1.png",
+      "https://merch-collection.vercel.app/screenshot2.png",
+      "https://merch-collection.vercel.app/screenshot3.png"
+    ],
+    "primaryCategory": "social",
+    "tags": [
+      "sbt",
+      "nft",
+      "events",
+      "base",
+      "ethereum"
+    ],
+    "heroImageUrl": "https://merch-collection.vercel.app/hero.png",
+    "tagline": "Claim event SBTs",
+    "ogTitle": "Merch MVP - Event SBT System",
+    "ogDescription": "Claim event attendance SBTs and mint premium companion NFTs on Base Sepolia.",
+    "ogImageUrl": "https://merch-collection.vercel.app/og-image.svg",
+    "canonicalDomain": "merch-collection.vercel.app",
+    "requiredChains": [
+      "eip155:84532"
+    ],
+    "requiredCapabilities": [
+      "actions.ready"
+    ],
+    "noindex": true
+  }
+}
