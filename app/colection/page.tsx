@@ -37,7 +37,7 @@ export default function ColectionPage() {
             {[1, 2, 3].map((i) => (
               <div key={i} className="flex justify-center">
                 <img
-                  src="/white-coffee-mug-3d-render.jpg"
+                  src="/cup.png"
                   alt="Coffee mug"
                   className="w-28 h-28 object-contain drop-shadow-2xl"
                 />
@@ -45,10 +45,10 @@ export default function ColectionPage() {
             ))}
           </div>
           <div className="grid grid-cols-3 gap-4">
-            {[4, 5].map((i) => (
+            {[4, 5, 6].map((i) => (
               <div key={i} className="flex justify-center">
                 <img
-                  src="/white-coffee-mug-3d-render.jpg"
+                  src="/tshirt.png"
                   alt="Coffee mug"
                   className="w-28 h-28 object-contain drop-shadow-2xl"
                 />
@@ -66,7 +66,7 @@ export default function ColectionPage() {
                 <p className="text-[#00d4ff] text-sm uppercase tracking-wider font-semibold">Obten tu merch</p>
                 <p className="text-[#00d4ff] text-sm uppercase tracking-wider font-semibold">de bienvenida</p>
               </div>
-              <div className="text-[#00d4ff] text-3xl font-bold tracking-wider">20 H 30M 12S</div>
+              <div className="text-[#00d4ff] text-3xl font-bold tracking-wider">AHORA!</div>
             </div>
           </div>
           <div className="absolute -bottom-2 left-0 right-0 h-1 bg-[#c8ff00]"></div>

@@ -24,13 +24,34 @@ export default function PremiumPage() {
             </h2>
           </div>
 
-          {/* Call to action text */}
-          <p className="text-center text-[#00d4ff] text-xl font-bold mb-8 uppercase tracking-wide">
-            ¡ Tus modelos más exclusivos aquí !
-          </p>
+          {/* Grid of premium items (6 individual boxes) */}
+          <div className="grid grid-cols-3 gap-4 mb-4">
+            {[
+              { src: '/hat.png', alt: 'Hat' },
+              { src: '/keyyy.png', alt: 'Key' },
+              { src: '/box.png', alt: 'Box' },
+            ].map((item, i) => (
+              <div key={i} className="flex justify-center">
+                <div className="w-32 h-32 bg-[#0000ff]/20 rounded-lg border border-white/10 flex items-center justify-center shadow-lg">
+                  <img src={item.src} alt={item.alt} className="w-24 h-24 object-contain drop-shadow-2xl" />
+                </div>
+              </div>
+            ))}
+          </div>
 
-          {/* Empty space for premium items */}
-          <div className="min-h-[200px]"></div>
+          <div className="grid grid-cols-3 gap-4">
+            {[
+              { src: '/backpack-leather.png', alt: 'Backpack' },
+              { src: '/headphones.png', alt: 'Headphones' },
+              { src: '/thermo.png', alt: 'Thermo' },
+            ].map((item, i) => (
+              <div key={i} className="flex justify-center">
+                <div className="w-32 h-32 bg-[#0000ff]/20 rounded-lg border border-white/10 flex items-center justify-center shadow-lg">
+                  <img src={item.src} alt={item.alt} className="w-24 h-24 object-contain drop-shadow-2xl" />
+                </div>
+              </div>
+            ))}
+          </div>
         </FuturisticCard>
 
         <BottomNavigation currentPath="/premium" />
