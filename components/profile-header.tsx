@@ -2,7 +2,6 @@
 
 import Link from "next/link"
 import { useBaseAccountUser } from "@/hooks/useBaseAccountUser"
-import { Cog6ToothIcon } from "@heroicons/react/24/outline"
 
 export function ProfileHeader() {
   const { displayName, username, pfpUrl, address, isLoading } = useBaseAccountUser()
@@ -12,10 +11,11 @@ export function ProfileHeader() {
 
   return (
     <div className="flex items-center gap-3 mb-6">
+      {/* Avatar */}
       <Link href="/profile" className="block">
         <div className="w-16 h-16 bg-[#0000ff] rounded-lg border-[3px] border-white flex items-center justify-center shadow-lg cursor-pointer hover:scale-105 transition-transform overflow-hidden sm:w-20 sm:h-20">
           {isLoading ? (
-            <div className="animate-spin w-8 h-8 border-4 border-white border-t-transparent rounded-full" aria-label="Cargando avatar" />
+            <div className="animate-spin w-8 h-8 border-4 border-white border-t-transparent rounded-full" aria-label="Loading avatar" />
           ) : pfpUrl ? (
             <img
               src={pfpUrl}
@@ -27,22 +27,29 @@ export function ProfileHeader() {
           )}
         </div>
       </Link>
+
+      {/* User info */}
       <div className="flex-1">
-        <div className="flex items-center gap-2">
-          <h1 className="text-lg font-bold text-white uppercase tracking-wider sm:text-xl">
-            {isLoading ? "Cargando..." : resolvedName}
-          </h1>
+        <div className="flex items-center justify-between">
+          <div>
+            <h1 className="text-lg font-bold text-white uppercase tracking-wider sm:text-xl">
+              {isLoading ? "Loading..." : resolvedName}
+            </h1>
+            <p className="text-xs text-white/80 uppercase tracking-[0.25em] sm:text-sm">
+              Merch Newbie
+            </p>
+          </div>
+
+          {/* ✅ New green Create Event button */}
           <Link 
-            href="/create_events" 
-            className="p-1 hover:bg-white/10 rounded-md transition-colors group"
-            title="Crear eventos"
+            href="/create_events"
+            className="ml-3 bg-[#c8ff00] text-black font-bold text-xs sm:text-sm px-4 py-2 rounded-lg uppercase tracking-wider hover:bg-[#b3e600] transition-colors shadow-md border border-[#c8ff00]/70"
           >
-            <Cog6ToothIcon className="w-5 h-5 text-white/70 group-hover:text-[#c8ff00] transition-colors" />
+            Create Event!
           </Link>
         </div>
-        <p className="text-xs text-white/80 uppercase tracking-[0.25em] sm:text-sm">
-          Merch Newbie
-        </p>
+
+        {/* Wallet info */}
         {address && (
           <div className="mt-2 bg-black/30 rounded-md px-2 py-[6px] border border-[#c8ff00]/30">
             <p className="text-[10px] text-[#c8ff00] uppercase tracking-[0.3em]">Base Account</p>

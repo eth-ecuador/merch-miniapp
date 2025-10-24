@@ -81,7 +81,7 @@ export default function ProfilePage() {
 
             {address && (
               <div className="bg-black/30 rounded-lg p-3 mx-4 border border-[#c8ff00]/30">
-                <p className="text-sm text-[#c8ff00] uppercase tracking-wide mb-1">Direccion Base Account</p>
+                <p className="text-sm text-[#c8ff00] uppercase tracking-wide mb-1">Base Account Address</p>
                 <p className="text-xs text-white/90 font-mono break-all">{address}</p>
               </div>
             )}
@@ -95,7 +95,7 @@ export default function ProfilePage() {
             {!isInMiniApp && !isLoading && (
               <div className="bg-amber-900/40 rounded-lg p-3 mx-4 border border-amber-500/30">
                 <p className="text-sm text-amber-200">
-                  Abre esta vista desde la Base App para cargar tu perfil y tu wallet.
+                  Open your profile in the Base App to load your wallet address.
                 </p>
               </div>
             )}
@@ -103,7 +103,7 @@ export default function ProfilePage() {
             {isInMiniApp && !isConnected && !isLoading && (
               <div className="bg-blue-900/30 rounded-lg p-3 mx-4 border border-blue-400/30 space-y-3">
                 <p className="text-sm text-blue-200">
-                  Autoriza tu Base Account para mostrar la direccion de tu wallet.
+                  Authorize your Base Account to show your wallet address.
                 </p>
                 <button
                   type="button"
