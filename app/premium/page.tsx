@@ -1,7 +1,10 @@
+"use client"
+
 import { CircuitBackground } from "@/components/circuit-background"
 import { ProfileHeader } from "@/components/profile-header"
 import { NavigationTabs } from "@/components/navigation-tabs"
 import { FuturisticCard } from "@/components/futuristic-card"
+import { Treasury } from "@/components/treasury"
 
 export default function PremiumPage() {
   return (
@@ -26,10 +29,20 @@ export default function PremiumPage() {
               </h2>
             </div>
 
-            {/* Progress Bar with neon styling */}
-            <div className="relative border-2 border-[#00d4ff] h-5 mb-6 overflow-hidden bg-[#0a0a3d]">
-              <div className="h-full w-[60%] bg-[#00d4ff] shadow-[0_0_16px_rgba(0,212,255,0.8)]"></div>
-              <div className="absolute inset-0 border border-[#4169e1]"></div>
+            {/* Treasury dinámico - colección personal del usuario */}
+            <Treasury />
+            
+            {/* Línea separadora */}
+            <div className="my-6 border-t border-white/20"></div>
+            
+            {/* Catálogo completo disponible */}
+            <div className="mb-4">
+              <h3 className="text-sm font-bold text-white/80 uppercase tracking-wider mb-3 text-center">
+                📖 Catálogo completo
+              </h3>
+              <p className="text-xs text-white/50 text-center mb-4">
+                Todos los items disponibles para reclamar
+              </p>
             </div>
 
             {/* Scrollable grid container - vertical only */}
@@ -37,12 +50,12 @@ export default function PremiumPage() {
               <div className="grid grid-cols-3 gap-4">
                 {/* Basic Items (formerly Collection) */}
                 {[
-                  { src: "/tshirt.png", alt: "T-shirt", type: "basic" },
-                  { src: "/cup.png", alt: "Coffee mug", type: "basic" },
-                  { src: "/glass_cup.png", alt: "Glass cup", type: "basic" },
-                  { src: "/tote_bag.png", alt: "Tote bag", type: "basic" },
-                  { src: "/glass_carryon.png", alt: "Glass carry-on", type: "basic" },
-                  { src: "/hat_merch.png", alt: "Hat", type: "basic" },
+                  { src: "/basic_merch/tshirt.png", alt: "T-shirt", type: "basic" },
+                  { src: "/basic_merch/cup.png", alt: "Coffee mug", type: "basic" },
+                  { src: "/basic_merch/glass_cup.png", alt: "Glass cup", type: "basic" },
+                  { src: "/basic_merch/tote_bag.png", alt: "Tote bag", type: "basic" },
+                  { src: "/basic_merch/glass_carryon.png", alt: "Glass carry-on", type: "basic" },
+                  { src: "/basic_merch/hat_merch.png", alt: "Hat", type: "basic" },
                   /* Premium Items */
                   { src: "/hat.png", alt: "Premium Hat", type: "premium" },
                   { src: "/keyyy.png", alt: "Key", type: "premium" },
@@ -51,12 +64,15 @@ export default function PremiumPage() {
                   { src: "/headphones.png", alt: "Headphones", type: "premium" },
                   { src: "/thermo.png", alt: "Thermo", type: "premium" },
                 ].map((item, i) => (
-                  <div key={i} className="flex flex-col items-center">
+                  <div key={i} className="flex flex-col items-center opacity-60">
                     <div className="w-28 h-28 bg-[#0000ff]/20 rounded-lg border border-white/10 flex items-center justify-center shadow-lg sm:w-32 sm:h-32 mb-2">
                       <img
                         src={item.src}
                         alt={item.alt}
                         className="w-20 h-20 object-contain drop-shadow-2xl sm:w-24 sm:h-24"
+                        onError={(e) => {
+                          (e.target as HTMLImageElement).src = '/placeholder.jpg'
+                        }}
                       />
                     </div>
                     <div className={`text-[10px] uppercase tracking-wider px-2 py-1 rounded-md ${

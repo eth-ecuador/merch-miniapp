@@ -30,6 +30,29 @@ export const MERCH_MANAGER_ABI = [
   },
   {
     "type": "function",
+    "name": "mintCompanionWithAttestation",
+    "inputs": [
+      { "name": "_sbtId", "type": "uint256", "internalType": "uint256" },
+      { "name": "_organizer", "type": "address", "internalType": "address" },
+      { "name": "_eventId", "type": "bytes32", "internalType": "bytes32" }
+    ],
+    "outputs": [
+      { "name": "", "type": "uint256", "internalType": "uint256" },
+      { "name": "", "type": "bytes32", "internalType": "bytes32" }
+    ],
+    "stateMutability": "payable"
+  },
+  {
+    "type": "function",
+    "name": "getUpgradeFee",
+    "inputs": [],
+    "outputs": [
+      { "name": "", "type": "uint256", "internalType": "uint256" }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
     "name": "getEvent",
     "inputs": [
       { "name": "_eventId", "type": "bytes32", "internalType": "bytes32" }
@@ -43,6 +66,17 @@ export const MERCH_MANAGER_ABI = [
       { "name": "createdAt", "type": "uint256", "internalType": "uint256" },
       { "name": "totalAttendees", "type": "uint256", "internalType": "uint256" },
       { "name": "maxAttendees", "type": "uint256", "internalType": "uint256" }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "tokenToEvent",
+    "inputs": [
+      { "name": "_tokenId", "type": "uint256", "internalType": "uint256" }
+    ],
+    "outputs": [
+      { "name": "", "type": "bytes32", "internalType": "bytes32" }
     ],
     "stateMutability": "view"
   },

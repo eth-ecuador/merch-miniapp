@@ -4,6 +4,7 @@ import { useState } from "react"
 import { useWriteContract, useWaitForTransactionReceipt } from "wagmi"
 import { useBaseAccountUser } from "@/hooks/useBaseAccountUser"
 import { MERCH_MANAGER_ABI, MERCH_MANAGER_ADDRESS } from "@/lib/contracts"
+import { saveClaimedNFT, CollectedNFT } from "@/lib/nft-collection-storage"
 
 interface ClaimResponse {
   eventId: string
@@ -11,6 +12,32 @@ interface ClaimResponse {
   signature: string
   is_valid: boolean
   metadata?: any
+  // Agregamos la imagen asignada externamente
+  assignedImage?: {
+    name: string
+    image: string
+    description: string
+  }
+}
+
+// Lista de imágenes disponibles en basic_merch
+const BASIC_MERCH_ITEMS = [
+  { name: "Coffee Cup", image: "/basic_merch/cup.png", description: "Premium ceramic coffee cup" },
+  { name: "Travel Glass", image: "/basic_merch/glass_carryon.png", description: "Durable travel glass" },
+  { name: "Glass Cup", image: "/basic_merch/glass_cup.png", description: "Elegant glass cup" },
+  { name: "Event Hat", image: "/basic_merch/hat_merch.png", description: "Stylish event hat" },
+  { name: "Tote Bag", image: "/basic_merch/tote_bag.png", description: "Eco-friendly tote bag" },
+  { name: "Event T-Shirt", image: "/basic_merch/tshirt.png", description: "Comfortable event t-shirt" }
+]
+
+// Función para asignar imagen completamente aleatoria
+function getRandomMerchItem(walletAddress: string) {
+  // Generar índice completamente aleatorio
+  const randomIndex = Math.floor(Math.random() * BASIC_MERCH_ITEMS.length)
+  
+  console.log('🎲 Item aleatorio seleccionado:', randomIndex, '→', BASIC_MERCH_ITEMS[randomIndex].name)
+  
+  return BASIC_MERCH_ITEMS[randomIndex]
 }
 
 export function ClaimNFT() {
@@ -58,9 +85,19 @@ export function ClaimNFT() {
         throw new Error(data.error || 'Código inválido')
       }
 
-      setClaimData(data)
+      // 🎨 Asignar imagen aleatoria basada en wallet address
+      const assignedImage = getRandomMerchItem(address)
+      console.log('🎨 Imagen asignada:', assignedImage.name, '->', assignedImage.image)
+
+      // Agregar imagen a los datos del claim
+      const enhancedData = {
+        ...data,
+        assignedImage
+      }
+
+      setClaimData(enhancedData)
       setStep('verified')
-      console.log('Código verificado:', data)
+      console.log('Código verificado con imagen:', enhancedData)
 
     } catch (err: any) {
       console.error('Error verifying code:', err)
@@ -107,12 +144,22 @@ export function ClaimNFT() {
   if (isConfirmed && step === 'minting') {
     setStep('success')
     
-    // Reset after success
-    setTimeout(() => {
-      setClaimCode("")
-      setClaimData(null)
-      setStep('input')
-    }, 5000)
+    // 💾 Guardar NFT en colección local
+    if (claimData && hash && address) {
+      const nftData: CollectedNFT = {
+        id: hash, // usar hash como ID único
+        walletAddress: address,
+        eventId: claimData.eventId,
+        name: claimData.assignedImage?.name || 'Unknown Item',
+        image: claimData.assignedImage?.image || '',
+        description: claimData.assignedImage?.description || '',
+        claimedAt: new Date().toISOString(),
+        transactionHash: hash
+      }
+      
+      saveClaimedNFT(nftData)
+      console.log('💾 NFT guardado en colección local:', nftData)
+    }
   }
 
   const resetForm = () => {
@@ -136,6 +183,28 @@ export function ClaimNFT() {
       {/* Success State */}
       {step === 'success' && (
         <div className="text-center space-y-4">
+          {/* Mostrar la imagen NFT obtenida */}
+          {claimData?.assignedImage && (
+            <div className="mx-auto mb-4">
+              <div className="w-24 h-24 mx-auto mb-3 bg-white/10 rounded-lg overflow-hidden border border-[#c8ff00]/50">
+                <img 
+                  src={claimData.assignedImage.image} 
+                  alt={claimData.assignedImage.name}
+                  className="w-full h-full object-cover"
+                  onError={(e) => {
+                    (e.target as HTMLImageElement).src = '/placeholder.jpg'
+                  }}
+                />
+              </div>
+              <h4 className="text-[#c8ff00] font-bold text-sm mb-1">
+                {claimData.assignedImage.name}
+              </h4>
+              <p className="text-xs text-white/70">
+                ¡Has obtenido este NFT!
+              </p>
+            </div>
+          )}
+          
           <div className="w-16 h-16 mx-auto bg-green-500 rounded-full flex items-center justify-center">
             <span className="text-2xl">🎉</span>
           </div>
@@ -145,10 +214,31 @@ export function ClaimNFT() {
               Tu Soul Bound Token ha sido mintado
             </p>
             {hash && (
-              <p className="text-xs text-white/60 mt-2 font-mono">
-                TX: {hash.slice(0, 10)}...{hash.slice(-8)}
-              </p>
+              <div className="mt-3 space-y-2">
+                <p className="text-xs text-white/60 font-mono">
+                  TX: {hash.slice(0, 10)}...{hash.slice(-8)}
+                </p>
+                {/* Link a BaseScan */}
+                <a 
+                  href={`https://base-sepolia.blockscout.com/tx/${hash}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-block bg-blue-500/20 text-blue-400 px-3 py-1 rounded text-xs hover:bg-blue-500/30 transition-colors"
+                >
+                  🔍 Ver en BaseScan
+                </a>
+              </div>
             )}
+          </div>
+
+          {/* Botón para canjear otro código */}
+          <div className="pt-4 border-t border-white/10">
+            <button
+              onClick={resetForm}
+              className="text-xs text-blue-400 hover:text-blue-300 underline transition-colors"
+            >
+              ¿Canjear otro código?
+            </button>
           </div>
         </div>
       )}
@@ -198,6 +288,35 @@ export function ClaimNFT() {
               {claimData.metadata?.name || 'NFT de Evento'}
             </p>
           </div>
+
+          {/* Mostrar imagen asignada */}
+          {claimData.assignedImage && (
+            <div className="bg-[#c8ff00]/10 border border-[#c8ff00]/30 rounded-lg p-3">
+              <p className="text-xs text-[#c8ff00] mb-3 uppercase tracking-wider text-center">
+                🎁 Tu NFT será:
+              </p>
+              <div className="flex items-center gap-3">
+                <div className="w-16 h-16 bg-white/10 rounded-lg overflow-hidden flex-shrink-0 border border-white/20">
+                  <img 
+                    src={claimData.assignedImage.image} 
+                    alt={claimData.assignedImage.name}
+                    className="w-full h-full object-cover"
+                    onError={(e) => {
+                      (e.target as HTMLImageElement).src = '/placeholder.jpg'
+                    }}
+                  />
+                </div>
+                <div className="flex-1">
+                  <h4 className="text-sm font-bold text-white mb-1">
+                    {claimData.assignedImage.name}
+                  </h4>
+                  <p className="text-xs text-white/70">
+                    {claimData.assignedImage.description}
+                  </p>
+                </div>
+              </div>
+            </div>
+          )}
 
           <div className="flex gap-2">
             <button

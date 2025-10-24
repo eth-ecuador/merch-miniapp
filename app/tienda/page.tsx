@@ -4,6 +4,7 @@ import { NavigationTabs } from "@/components/navigation-tabs"
 import { FuturisticCard } from "@/components/futuristic-card"
 import { SignaturePing } from "@/components/signature-ping"
 import { ClaimNFT } from "@/components/claim-nft"
+import UpgradeMerch from "@/components/upgrade-merch"
 
 export default function TiendaPage() {
   return (
@@ -49,6 +50,15 @@ export default function TiendaPage() {
             <FuturisticCard>
               <div className="p-4">
                 <ClaimNFT />
+              </div>
+            </FuturisticCard>
+          </div>
+
+          {/* Upgrade Merch */}
+          <div className="w-full max-w-md mt-6">
+            <FuturisticCard>
+              <div className="p-4">
+                <UpgradeMerch />
               </div>
             </FuturisticCard>
           </div>
