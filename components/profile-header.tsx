@@ -2,6 +2,7 @@
 
 import Link from "next/link"
 import { useBaseAccountUser } from "@/hooks/useBaseAccountUser"
+import { Cog6ToothIcon } from "@heroicons/react/24/outline"
 
 export function ProfileHeader() {
   const { displayName, username, pfpUrl, address, isLoading } = useBaseAccountUser()
@@ -27,9 +28,18 @@ export function ProfileHeader() {
         </div>
       </Link>
       <div className="flex-1">
-        <h1 className="text-lg font-bold text-white uppercase tracking-wider sm:text-xl">
-          {isLoading ? "Cargando..." : resolvedName}
-        </h1>
+        <div className="flex items-center gap-2">
+          <h1 className="text-lg font-bold text-white uppercase tracking-wider sm:text-xl">
+            {isLoading ? "Cargando..." : resolvedName}
+          </h1>
+          <Link 
+            href="/create_events" 
+            className="p-1 hover:bg-white/10 rounded-md transition-colors group"
+            title="Crear eventos"
+          >
+            <Cog6ToothIcon className="w-5 h-5 text-white/70 group-hover:text-[#c8ff00] transition-colors" />
+          </Link>
+        </div>
         <p className="text-xs text-white/80 uppercase tracking-[0.25em] sm:text-sm">
           Merch Newbie
         </p>
