@@ -39,11 +39,18 @@ export default function ColectionPage() {
 
             {/* Grid of available merch */}
             <div className="grid grid-cols-3 gap-4">
-              {[1, 2, 3, 4, 5, 6].map((i) => (
+              {[
+                { src: "/tshirt.png", alt: "T-shirt" },
+                { src: "/cup.png", alt: "Coffee mug" },
+                { src: "/glass_cup.png", alt: "Glass cup" },
+                { src: "/tote_bag.png", alt: "Tote bag" },
+                { src: "/glass_carryon.png", alt: "Glass carry-on" },
+                { src: "/hat_merch.png", alt: "Hat" }
+              ].map((item, i) => (
                 <div key={i} className="flex justify-center">
                   <img
-                    src={i <= 3 ? "/cup.png" : "/tshirt.png"}
-                    alt={i <= 3 ? "Coffee mug" : "T-shirt"}
+                    src={item.src}
+                    alt={item.alt}
                     className="w-24 h-24 object-contain drop-shadow-2xl sm:w-28 sm:h-28"
                   />
                 </div>

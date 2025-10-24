@@ -81,8 +81,8 @@ export default function ProfilePage() {
 
             {address && (
               <div className="bg-black/30 rounded-lg p-3 mx-4 border border-[#c8ff00]/30">
-                <p className="text-sm text-[#c8ff00] uppercase tracking-wide mb-1">Base Account Address</p>
-                <p className="text-xs text-white/90 font-mono break-all">{address}</p>
+                <p className="text-sm text-[#c8ff00] uppercase tracking-wide mb-1">Base Account ENS</p>
+                <p className="text-xs text-white/90 font-mono break-all">{username ? `${username}` : address}</p>
               </div>
             )}
 

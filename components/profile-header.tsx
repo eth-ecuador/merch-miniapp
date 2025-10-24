@@ -40,20 +40,31 @@ export function ProfileHeader() {
             </p>
           </div>
 
-          {/* ✅ New green Create Event button */}
-          <Link 
-            href="/create_events"
-            className="ml-3 bg-[#c8ff00] text-black font-bold text-xs sm:text-sm px-4 py-2 rounded-lg uppercase tracking-wider hover:bg-[#b3e600] transition-colors shadow-md border border-[#c8ff00]/70"
-          >
-            Create Event!
-          </Link>
+          {/* Buttons container */}
+          <div className="ml-3 flex flex-col gap-2 mt-2">
+            {/* Create Event button - smaller */}
+            <Link 
+              href="/create_events"
+              className="bg-[#c8ff00] text-black font-bold text-[10px] px-2 py-1 rounded-md uppercase tracking-wider hover:bg-[#b3e600] transition-colors shadow-md border border-[#c8ff00]/70"
+            >
+              Create Event!
+            </Link>
+            
+            {/* Claim Now button */}
+            <Link 
+              href="/tienda"
+              className="bg-[#0000ff] text-white font-bold text-[10px] px-2 py-1 rounded-md uppercase tracking-wider hover:bg-[#0033cc] transition-colors shadow-md border border-[#0000ff]/70"
+            >
+              Claim Now!
+            </Link>
+          </div>
         </div>
 
-        {/* Wallet info */}
+        {/* Wallet info - shorter */}
         {address && (
-          <div className="mt-2 bg-black/30 rounded-md px-2 py-[6px] border border-[#c8ff00]/30">
-            <p className="text-[10px] text-[#c8ff00] uppercase tracking-[0.3em]">Base Account</p>
-            <p className="text-[11px] text-white/90 font-mono">{address.slice(0, 6)}...{address.slice(-4)}</p>
+          <div className="mt-2 bg-black/30 rounded-md px-2 py-1 border border-[#c8ff00]/30 max-w-[160px]">
+            <p className="text-[9px] text-[#c8ff00] uppercase tracking-[0.3em]">Base Account ENS</p>
+            <p className="text-[10px] text-white/90 font-mono truncate">{username ? `${username}` : `${address.slice(0, 6)}...${address.slice(-4)}`}</p>
           </div>
         )}
       </div>
