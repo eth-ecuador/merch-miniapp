@@ -3,11 +3,18 @@ import type { ReactNode } from "react"
 interface FuturisticCardProps {
   children: ReactNode
   accentColor?: string
+  className?: string
+  contentClassName?: string
 }
 
-export function FuturisticCard({ children, accentColor = "#00d4ff" }: FuturisticCardProps) {
+export function FuturisticCard({
+  children,
+  accentColor = "#00d4ff",
+  className = "mb-6",
+  contentClassName = "p-6",
+}: FuturisticCardProps) {
   return (
-    <div className="relative mb-6">
+    <div className={`relative ${className}`}>
       {/* Top decorative stepped border (smaller) */}
       <div className="absolute -top-4 left-0 right-0 flex items-end">
         <div className="w-8 h-4 bg-[#4169e1] border-2" style={{ borderColor: accentColor }}></div>
@@ -18,7 +25,7 @@ export function FuturisticCard({ children, accentColor = "#00d4ff" }: Futuristic
 
       {/* Main card container with smaller stepped corners */}
       <div
-        className="relative bg-[#0a0a3d] border-4 border-[#4169e1] p-6"
+        className={`relative bg-[#0a0a3d] border-4 border-[#4169e1] ${contentClassName}`}
         style={{
           clipPath:
             "polygon(0 10px, 10px 10px, 10px 0, calc(100% - 20px) 0, calc(100% - 20px) 6px, calc(100% - 10px) 6px, calc(100% - 10px) 10px, 100% 10px, 100% calc(100% - 10px), calc(100% - 10px) calc(100% - 10px), calc(100% - 10px) 100%, 10px 100%, 10px calc(100% - 10px), 0 calc(100% - 10px))",
