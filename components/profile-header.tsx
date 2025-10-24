@@ -40,33 +40,32 @@ export function ProfileHeader() {
             </p>
           </div>
 
-          {/* Buttons container */}
-          <div className="ml-3 flex flex-col gap-2 mt-2">
-            {/* Create Event button - smaller */}
-            <Link 
-              href="/create_events"
-              className="bg-[#c8ff00] text-black font-bold text-[10px] px-2 py-1 rounded-md uppercase tracking-wider hover:bg-[#b3e600] transition-colors shadow-md border border-[#c8ff00]/70"
-            >
-              Create Event!
-            </Link>
-            
-            {/* Claim Now button */}
-            <Link 
-              href="/tienda"
-              className="bg-[#0000ff] text-white font-bold text-[10px] px-2 py-1 rounded-md uppercase tracking-wider hover:bg-[#0033cc] transition-colors shadow-md border border-[#0000ff]/70"
-            >
-              Claim Now!
-            </Link>
-          </div>
+          {/* Wallet info - moved to top right */}
+          {address && (
+            <div className="ml-3 bg-black/30 rounded-md px-2 py-1 border border-[#c8ff00]/30 max-w-[120px]">
+              <p className="text-[10px] text-white/90 font-mono truncate">{username ? `${username}` : `${address.slice(0, 6)}...${address.slice(-4)}`}</p>
+            </div>
+          )}
         </div>
 
-        {/* Wallet info - shorter */}
-        {address && (
-          <div className="mt-2 bg-black/30 rounded-md px-2 py-1 border border-[#c8ff00]/30 max-w-[160px]">
-            <p className="text-[9px] text-[#c8ff00] uppercase tracking-[0.3em]">Base Account ENS</p>
-            <p className="text-[10px] text-white/90 font-mono truncate">{username ? `${username}` : `${address.slice(0, 6)}...${address.slice(-4)}`}</p>
-          </div>
-        )}
+        {/* Buttons container - moved to bottom */}
+        <div className="flex gap-2 mt-2">
+          {/* Create Event button - smaller */}
+          <Link 
+            href="/create_events"
+            className="bg-[#c8ff00] text-black font-bold text-[10px] px-2 py-1 rounded-md uppercase tracking-wider hover:bg-[#b3e600] transition-colors shadow-md border border-[#c8ff00]/70"
+          >
+            Create Event!
+          </Link>
+          
+          {/* Claim Now button */}
+          <Link 
+            href="/tienda"
+            className="bg-[#0000ff] text-white font-bold text-[10px] px-2 py-1 rounded-md uppercase tracking-wider hover:bg-[#0033cc] transition-colors shadow-md border border-[#0000ff]/70"
+          >
+            Claim Now!
+          </Link>
+        </div>
       </div>
     </div>
   )

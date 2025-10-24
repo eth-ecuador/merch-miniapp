@@ -35,7 +35,7 @@ export async function generateMetadata(): Promise<Metadata> {
     },
     other: {
       'fc:miniapp': JSON.stringify({
-        version: 'next',
+        version: '1',
         imageUrl: `${appUrl}/og-image.png`,
         button: {
           title: 'Claim SBT',

@@ -4,7 +4,6 @@ import { useCallback } from 'react'
 import { CircuitBackground } from "@/components/circuit-background"
 import { ProfileHeader } from "@/components/profile-header"
 import { NavigationTabs } from "@/components/navigation-tabs"
-import { BottomNavigation } from "@/components/bottom-navigation"
 import { UserDebugInfo } from "@/components/user-debug-info"
 import { useBaseAccountUser } from "@/hooks/useBaseAccountUser"
 
@@ -81,7 +80,7 @@ export default function ProfilePage() {
 
             {address && (
               <div className="bg-black/30 rounded-lg p-3 mx-4 border border-[#c8ff00]/30">
-                <p className="text-sm text-[#c8ff00] uppercase tracking-wide mb-1">Base Account ENS</p>
+                <p className="text-sm text-[#c8ff00] uppercase tracking-wide mb-1"></p>
                 <p className="text-xs text-white/90 font-mono break-all">{username ? `${username}` : address}</p>
               </div>
             )}
@@ -130,8 +129,6 @@ export default function ProfilePage() {
           <div className="absolute -bottom-8 -left-4 w-16 h-16 border-l-4 border-b-4 border-[#c8ff00]"></div>
           <div className="absolute -bottom-8 -right-4 w-16 h-16 border-r-4 border-b-4 border-[#c8ff00]"></div>
         </div>
-
-        <BottomNavigation currentPath="/profile" />
       </div>
 
       <UserDebugInfo userInfo={userInfo} />

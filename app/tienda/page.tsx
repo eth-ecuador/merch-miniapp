@@ -1,7 +1,6 @@
 import { CircuitBackground } from "@/components/circuit-background"
 import { ProfileHeader } from "@/components/profile-header"
 import { NavigationTabs } from "@/components/navigation-tabs"
-import { BottomNavigation } from "@/components/bottom-navigation"
 import { FuturisticCard } from "@/components/futuristic-card"
 import { SignaturePing } from "@/components/signature-ping"
 import { ClaimNFT } from "@/components/claim-nft"
@@ -57,8 +56,6 @@ export default function TiendaPage() {
           {/* Empty space for store items */}
           <div className="flex-1 w-full" />
         </div>
-
-        <BottomNavigation currentPath="/tienda" />
       </div>
     </div>
   )

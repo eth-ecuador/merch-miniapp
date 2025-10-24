@@ -31,7 +31,7 @@
       "base",
       "ethereum"
     ],
-    "heroImageUrl": "https://merch-collection.vercel.app/hero.svg",
+    "heroImageUrl": "https://merch-collection.vercel.app/hero.png",
     "tagline": "Claim event SBTs",
     "ogTitle": "Merch MVP - Event SBT System",
     "ogDescription": "Claim event attendance SBTs and mint premium companion NFTs on Base.",

@@ -1,7 +1,6 @@
 import { CircuitBackground } from "@/components/circuit-background"
 import { ProfileHeader } from "@/components/profile-header"
 import { NavigationTabs } from "@/components/navigation-tabs"
-import { BottomNavigation } from "@/components/bottom-navigation"
 import Link from "next/link"
 
 export default function RangoPage() {
@@ -64,8 +63,6 @@ export default function RangoPage() {
             </div>
           </div>
         </div>
-
-        <BottomNavigation currentPath="/rango" />
       </div>
     </div>
   )
