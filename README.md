@@ -252,7 +252,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 🔗 Links
 
-- **Live App**: [Deployment URL]
+- **Live App**: [https://merch-collection.vercel.app/premium]
 - **Smart Contract**: [`0xD71F654c7B9C15A54B2617262369fA219c15fe24`](https://sepolia.basescan.org/address/0xD71F654c7B9C15A54B2617262369fA219c15fe24)
 - **Backend API**: [https://merch-backend-ot7l.onrender.com](https://merch-backend-ot7l.onrender.com)
 - **Base Sepolia Explorer**: [BaseScan](https://sepolia.basescan.org)

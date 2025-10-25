@@ -15,12 +15,27 @@
     "0x274638c3bbd42d92cc8a4d8b8b2530082880ac5a62ce75bd15a086ca4a39871e": {
       "name": "Base Batches",
       "codes": ["BASEBATCHE-KKTS68-0044"]
+    },
+    "0x9fb8c3fb237ca25fbee6c715a671f3156e0d4c5146fe105f7f0473cb2ba5d80a": {
+      "name": "Base Batches",
+      "codes": ["BASEBATCHE-P21E58-0038"]
+    },
+    "0x63d1880b6c8f835326d6cf567e020af5cbb438cbcf053c6b98a5850b040f46da": {
+      "name": "Base Batches", 
+      "codes": ["BASEBATCHE-3Q3JHG-0049"]
+    },
+    "0x65eda20da01b42bed59e2ecd00777b257e82511ad1fdbdd019c8d049b09b524e": {
+      "name": "Base Batches",
+      "codes": ["BASEBATCHE-DZTOUP-0049"]
     }
   },
   "codeToEventId": {
     "WORKSHOPBA-7MZ6CG-0000": "0xf4fd6e1a5ce453c4c62b9ff20e6794edd5a2960aabcd1a452d6e14992b16b658",
     "WORKSHOPBA-2NTMQH-0036": "0x552ff1c6d4fc0ccedab930b1a2c4889b5176324bf993a1c3cbb0e7c1bf1afd08",
     "BASECAMPHO-H11K0X-0046": "0x78f93b435c1b916c95b76ff1e5a88f2cd4b7b0f27862f6164f0821c549b32120",
-    "BASEBATCHE-KKTS68-0044": "0x274638c3bbd42d92cc8a4d8b8b2530082880ac5a62ce75bd15a086ca4a39871e"
+    "BASEBATCHE-KKTS68-0044": "0x274638c3bbd42d92cc8a4d8b8b2530082880ac5a62ce75bd15a086ca4a39871e",
+    "BASEBATCHE-P21E58-0038": "0x9fb8c3fb237ca25fbee6c715a671f3156e0d4c5146fe105f7f0473cb2ba5d80a",
+    "BASEBATCHE-3Q3JHG-0049": "0x63d1880b6c8f835326d6cf567e020af5cbb438cbcf053c6b98a5850b040f46da",
+    "BASEBATCHE-DZTOUP-0049": "0x65eda20da01b42bed59e2ecd00777b257e82511ad1fdbdd019c8d049b09b524e"
   }
 }
