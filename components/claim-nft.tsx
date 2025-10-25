@@ -6,6 +6,10 @@ import { useBaseAccountUser } from "@/hooks/useBaseAccountUser"
 import { MERCH_MANAGER_ABI, MERCH_MANAGER_ADDRESS } from "@/lib/contracts"
 import { saveClaimedNFT, CollectedNFT } from "@/lib/nft-collection-storage"
 
+interface ClaimNFTProps {
+  onTokenClaimed?: (tokenId: string) => void
+}
+
 interface ClaimResponse {
   eventId: string
   tokenURI: string
@@ -40,7 +44,7 @@ function getRandomMerchItem(walletAddress: string) {
   return BASIC_MERCH_ITEMS[randomIndex]
 }
 
-export function ClaimNFT() {
+export function ClaimNFT({ onTokenClaimed }: ClaimNFTProps = {}) {
   const { address } = useBaseAccountUser()
   const { writeContract, data: hash, isPending } = useWriteContract()
   const { isLoading: isConfirming, isSuccess: isConfirmed, data: receipt } = useWaitForTransactionReceipt({
@@ -156,6 +160,8 @@ export function ClaimNFT() {
             if (tokenIdHex) {
               const tokenId = parseInt(tokenIdHex, 16).toString()
               setMintedTokenId(tokenId)
+              // Llamar al callback para pasar el token ID al padre
+              onTokenClaimed?.(tokenId)
               console.log('🎯 Token ID extraído:', tokenId)
               break
             }

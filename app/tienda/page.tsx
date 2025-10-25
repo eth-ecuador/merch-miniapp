@@ -1,3 +1,5 @@
+"use client"
+
 import { CircuitBackground } from "@/components/circuit-background"
 import { ProfileHeader } from "@/components/profile-header"
 import { NavigationTabs } from "@/components/navigation-tabs"
@@ -5,8 +7,10 @@ import { FuturisticCard } from "@/components/futuristic-card"
 // import { SignaturePing } from "@/components/signature-ping" // HIDDEN
 import { ClaimNFT } from "@/components/claim-nft"
 import UpgradeMerch from "@/components/upgrade-merch"
+import { useState } from "react"
 
 export default function TiendaPage() {
+  const [claimedTokenId, setClaimedTokenId] = useState<string>('')
   return (
     <div className="min-h-screen bg-[#1a1a4d] text-white relative overflow-hidden">
       <CircuitBackground />
@@ -51,7 +55,7 @@ export default function TiendaPage() {
           <div className="w-full max-w-md mt-6">
             <FuturisticCard>
               <div className="p-4">
-                <ClaimNFT />
+                <ClaimNFT onTokenClaimed={setClaimedTokenId} />
               </div>
             </FuturisticCard>
           </div>
@@ -60,7 +64,7 @@ export default function TiendaPage() {
           <div className="w-full max-w-md mt-6">
             <FuturisticCard>
               <div className="p-4">
-                <UpgradeMerch />
+                <UpgradeMerch prefilledTokenId={claimedTokenId} />
               </div>
             </FuturisticCard>
           </div>

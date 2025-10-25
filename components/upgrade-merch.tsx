@@ -1,10 +1,14 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useWriteContract, useReadContract, useAccount, useWaitForTransactionReceipt } from 'wagmi'
 import { parseEther, formatEther } from 'viem'
 import { MERCH_MANAGER_ADDRESS, MERCH_MANAGER_ABI } from '@/lib/contracts'
 import { saveClaimedNFT, CollectedNFT } from '@/lib/nft-collection-storage'
+
+interface UpgradeMerchProps {
+  prefilledTokenId?: string
+}
 
 // Lista de imágenes premium disponibles
 const PREMIUM_MERCH_ITEMS = [
@@ -26,9 +30,17 @@ function getRandomPremiumItem(walletAddress: string) {
   return PREMIUM_MERCH_ITEMS[randomIndex]
 }
 
-export default function UpgradeMerch() {
+export default function UpgradeMerch({ prefilledTokenId }: UpgradeMerchProps = {}) {
   const [tokenId, setTokenId] = useState('')
   const [assignedPremiumImage, setAssignedPremiumImage] = useState<any>(null)
+  
+  // Usar el token ID prellenado cuando se proporcione
+  useEffect(() => {
+    if (prefilledTokenId && prefilledTokenId !== tokenId) {
+      setTokenId(prefilledTokenId)
+      console.log('🎯 Token ID auto-filled from claim:', prefilledTokenId)
+    }
+  }, [prefilledTokenId, tokenId])
   const { address } = useAccount()
   
   const { 
@@ -48,7 +60,7 @@ export default function UpgradeMerch() {
   const upgradeFee = contractUpgradeFee || parseEther('0.001')
 
   // EventId hardcodeado
-  const eventId = '0x7da127c1c830d63313149007a57b7d87baba64ee21dadf57260d061532a0b1de'
+  const eventId = '0x4db1f0f04309a79a4ac19d1593d7b4ebe6cf1a9e266f38ae5dd387ca28d44691'
 
   // Esperar confirmación de transacción
   const { isLoading: isConfirming, isSuccess } = useWaitForTransactionReceipt({
