@@ -146,10 +146,20 @@ export function Treasury() {
                   <p className="text-white/50 text-xs">
                     {formatDate(nft.claimedAt)}
                   </p>
-                  <div className="mt-1">
+                  <div className="mt-1 flex justify-center items-center gap-1">
                     <span className="inline-block bg-purple-500/20 text-purple-400 text-xs px-2 py-0.5 rounded">
                       #{index + 1}
                     </span>
+                    {/* Badge para indicar si es Premium o Basic */}
+                    {nft.id.startsWith('premium-') ? (
+                      <span className="inline-block bg-gradient-to-r from-yellow-400/20 to-orange-400/20 text-yellow-400 text-xs px-1 py-0.5 rounded border border-yellow-400/30">
+                        ⭐ Premium
+                      </span>
+                    ) : (
+                      <span className="inline-block bg-green-500/20 text-green-400 text-xs px-1 py-0.5 rounded border border-green-400/30">
+                        🎯 Basic
+                      </span>
+                    )}
                   </div>
                 </div>
               </div>

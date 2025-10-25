@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { useWriteContract, useReadContract, useAccount, useWaitForTransactionReceipt } from 'wagmi'
 import { parseEther, formatEther } from 'viem'
 import { MERCH_MANAGER_ADDRESS, MERCH_MANAGER_ABI } from '@/lib/contracts'
+import { saveClaimedNFT, CollectedNFT } from '@/lib/nft-collection-storage'
 
 // Lista de imágenes premium disponibles
 const PREMIUM_MERCH_ITEMS = [
@@ -44,7 +45,7 @@ export default function UpgradeMerch() {
   })
 
   // EventId hardcodeado
-  const eventId = '0x6b312232b3620ed141d4909a14bb3a9596ea213d41750da2e8427d3d7f82cd4d'
+  const eventId = '0xec493eded44078c686aa94a31fe7abc40f51b709626c2a5205a8182bcb732a8e'
 
   // Esperar confirmación de transacción
   const { isLoading: isConfirming, isSuccess } = useWaitForTransactionReceipt({
@@ -52,9 +53,29 @@ export default function UpgradeMerch() {
   })
 
   // Asignar imagen premium cuando el upgrade sea exitoso
-  if (isSuccess && hash && !assignedPremiumImage) {
-    const premiumItem = getRandomPremiumItem(address || '')
+  if (isSuccess && hash && !assignedPremiumImage && address) {
+    const premiumItem = getRandomPremiumItem(address)
     setAssignedPremiumImage(premiumItem)
+    
+    // Guardar el Premium NFT en localStorage
+    const premiumNFT: CollectedNFT = {
+      id: `premium-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
+      walletAddress: address,
+      eventId: eventId, // Usamos el eventId del upgrade
+      name: premiumItem.name,
+      description: premiumItem.description,
+      image: premiumItem.image,
+      claimedAt: new Date().toISOString(),
+      transactionHash: hash // Corregido el nombre del campo
+    }
+    
+    try {
+      saveClaimedNFT(premiumNFT) // Solo un parámetro
+      console.log('💎 Premium NFT saved to collection:', premiumNFT)
+    } catch (error) {
+      console.error('Error saving premium NFT:', error)
+    }
+    
     console.log('🎉 Premium NFT upgraded! Assigned image:', premiumItem.name)
   }
 
