@@ -45,7 +45,7 @@ export default function UpgradeMerch() {
   })
 
   // EventId hardcodeado
-  const eventId = '0xec493eded44078c686aa94a31fe7abc40f51b709626c2a5205a8182bcb732a8e'
+  const eventId = '0x7da127c1c830d63313149007a57b7d87baba64ee21dadf57260d061532a0b1de'
 
   // Esperar confirmación de transacción
   const { isLoading: isConfirming, isSuccess } = useWaitForTransactionReceipt({
@@ -80,7 +80,28 @@ export default function UpgradeMerch() {
   }
 
   const handleUpgrade = async () => {
-    if (!tokenId || !address || !upgradeFee) return
+    console.log('🔧 Debug upgrade button:')
+    console.log('- tokenId:', tokenId)
+    console.log('- address:', address)
+    console.log('- upgradeFee:', upgradeFee)
+    console.log('- isPending:', isPending)
+    console.log('- isConfirming:', isConfirming)
+    
+    // Validaciones con mensajes específicos
+    if (!address) {
+      alert('Please connect your wallet first')
+      return
+    }
+    
+    if (!tokenId || tokenId.trim() === '') {
+      alert('Please enter a Token ID to upgrade')
+      return
+    }
+    
+    if (!upgradeFee) {
+      alert('Upgrade fee is still loading, please wait a moment')
+      return
+    }
 
     try {      
       await writeContract({
@@ -168,7 +189,7 @@ export default function UpgradeMerch() {
               Processing...
             </>
           ) : (
-            'Upgrade a Premium NFT'
+            'Upgrade to Premium NFT'
           )}
         </button>
 

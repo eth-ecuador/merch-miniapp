@@ -43,7 +43,7 @@ function getRandomMerchItem(walletAddress: string) {
 export function ClaimNFT() {
   const { address } = useBaseAccountUser()
   const { writeContract, data: hash, isPending } = useWriteContract()
-  const { isLoading: isConfirming, isSuccess: isConfirmed } = useWaitForTransactionReceipt({
+  const { isLoading: isConfirming, isSuccess: isConfirmed, data: receipt } = useWaitForTransactionReceipt({
     hash,
   })
 
@@ -52,6 +52,7 @@ export function ClaimNFT() {
   const [error, setError] = useState<string | null>(null)
   const [claimData, setClaimData] = useState<ClaimResponse | null>(null)
   const [step, setStep] = useState<'input' | 'verified' | 'minting' | 'success'>('input')
+  const [mintedTokenId, setMintedTokenId] = useState<string | null>(null)
 
   const verifyCode = async () => {
     if (!claimCode.trim() || !address) {
@@ -144,6 +145,27 @@ export function ClaimNFT() {
   if (isConfirmed && step === 'minting') {
     setStep('success')
     
+    // Extraer tokenId de los logs de la transacción
+    if (receipt && receipt.logs) {
+      try {
+        // Buscar el evento Transfer para obtener el tokenId
+        for (const log of receipt.logs) {
+          if (log.topics && log.topics.length >= 4) {
+            // El tokenId está en el 4to topic del evento Transfer
+            const tokenIdHex = log.topics[3]
+            if (tokenIdHex) {
+              const tokenId = parseInt(tokenIdHex, 16).toString()
+              setMintedTokenId(tokenId)
+              console.log('🎯 Token ID extraído:', tokenId)
+              break
+            }
+          }
+        }
+      } catch (error) {
+        console.error('Error extracting token ID:', error)
+      }
+    }
+    
     // 💾 Guardar NFT en colección local
     if (claimData && hash && address) {
       const nftData: CollectedNFT = {
@@ -167,6 +189,7 @@ export function ClaimNFT() {
     setClaimData(null)
     setError(null)
     setStep('input')
+    setMintedTokenId(null)
   }
 
   return (
@@ -215,6 +238,11 @@ export function ClaimNFT() {
             </p>
             {hash && (
               <div className="mt-3 space-y-2">
+                {mintedTokenId && (
+                  <p className="text-xs text-[#c8ff00] font-mono">
+                    Token: #{mintedTokenId}
+                  </p>
+                )}
                 <p className="text-xs text-white/60 font-mono">
                   TX: {hash.slice(0, 10)}...{hash.slice(-8)}
                 </p>
