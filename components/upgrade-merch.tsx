@@ -8,6 +8,7 @@ import { saveClaimedNFT, CollectedNFT } from '@/lib/nft-collection-storage'
 
 interface UpgradeMerchProps {
   prefilledTokenId?: string
+  prefilledEventId?: string
 }
 
 // Lista de imágenes premium disponibles
@@ -30,8 +31,9 @@ function getRandomPremiumItem(walletAddress: string) {
   return PREMIUM_MERCH_ITEMS[randomIndex]
 }
 
-export default function UpgradeMerch({ prefilledTokenId }: UpgradeMerchProps = {}) {
+export default function UpgradeMerch({ prefilledTokenId, prefilledEventId }: UpgradeMerchProps = {}) {
   const [tokenId, setTokenId] = useState('')
+  const [eventId, setEventId] = useState('0x4db1f0f04309a79a4ac19d1593d7b4ebe6cf1a9e266f38ae5dd387ca28d44691') // fallback
   const [assignedPremiumImage, setAssignedPremiumImage] = useState<any>(null)
   
   // Usar el token ID prellenado cuando se proporcione
@@ -41,6 +43,14 @@ export default function UpgradeMerch({ prefilledTokenId }: UpgradeMerchProps = {
       console.log('🎯 Token ID auto-filled from claim:', prefilledTokenId)
     }
   }, [prefilledTokenId, tokenId])
+
+  // Usar el event ID prellenado cuando se proporcione
+  useEffect(() => {
+    if (prefilledEventId && prefilledEventId !== eventId) {
+      setEventId(prefilledEventId)
+      console.log('🎯 Event ID auto-filled from claim:', prefilledEventId)
+    }
+  }, [prefilledEventId, eventId])
   const { address } = useAccount()
   
   const { 
@@ -58,9 +68,6 @@ export default function UpgradeMerch({ prefilledTokenId }: UpgradeMerchProps = {
 
   // Upgrade fee hardcodeado como fallback (0.001 ETH)
   const upgradeFee = contractUpgradeFee || parseEther('0.001')
-
-  // EventId hardcodeado
-  const eventId = '0x4db1f0f04309a79a4ac19d1593d7b4ebe6cf1a9e266f38ae5dd387ca28d44691'
 
   // Esperar confirmación de transacción
   const { isLoading: isConfirming, isSuccess } = useWaitForTransactionReceipt({
@@ -137,7 +144,7 @@ export default function UpgradeMerch({ prefilledTokenId }: UpgradeMerchProps = {
         args: [
           BigInt(tokenId), // SBT ID
           address, // organizer (puede ser el mismo usuario)
-          eventId // eventId hardcodeado
+          eventId as `0x${string}` // eventId dinámico
         ],
         value: upgradeFee
       })
@@ -152,6 +159,7 @@ export default function UpgradeMerch({ prefilledTokenId }: UpgradeMerchProps = {
 
   const resetForm = () => {
     setTokenId('')
+    setEventId('0x4db1f0f04309a79a4ac19d1593d7b4ebe6cf1a9e266f38ae5dd387ca28d44691') // reset to fallback
     setAssignedPremiumImage(null)
   }
 

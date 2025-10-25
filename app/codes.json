@@ -1,0 +1,26 @@
+{
+  "events": {
+    "0xf4fd6e1a5ce453c4c62b9ff20e6794edd5a2960aabcd1a452d6e14992b16b658": {
+      "name": "Workshop BA",
+      "codes": ["WORKSHOPBA-7MZ6CG-0000"]
+    },
+    "0x552ff1c6d4fc0ccedab930b1a2c4889b5176324bf993a1c3cbb0e7c1bf1afd08": {
+      "name": "Workshop BA",
+      "codes": ["WORKSHOPBA-2NTMQH-0036"]
+    },
+    "0x78f93b435c1b916c95b76ff1e5a88f2cd4b7b0f27862f6164f0821c549b32120": {
+      "name": "Base Camp HO",
+      "codes": ["BASECAMPHO-H11K0X-0046"]
+    },
+    "0x274638c3bbd42d92cc8a4d8b8b2530082880ac5a62ce75bd15a086ca4a39871e": {
+      "name": "Base Batches",
+      "codes": ["BASEBATCHE-KKTS68-0044"]
+    }
+  },
+  "codeToEventId": {
+    "WORKSHOPBA-7MZ6CG-0000": "0xf4fd6e1a5ce453c4c62b9ff20e6794edd5a2960aabcd1a452d6e14992b16b658",
+    "WORKSHOPBA-2NTMQH-0036": "0x552ff1c6d4fc0ccedab930b1a2c4889b5176324bf993a1c3cbb0e7c1bf1afd08",
+    "BASECAMPHO-H11K0X-0046": "0x78f93b435c1b916c95b76ff1e5a88f2cd4b7b0f27862f6164f0821c549b32120",
+    "BASEBATCHE-KKTS68-0044": "0x274638c3bbd42d92cc8a4d8b8b2530082880ac5a62ce75bd15a086ca4a39871e"
+  }
+}

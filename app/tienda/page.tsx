@@ -11,6 +11,7 @@ import { useState } from "react"
 
 export default function TiendaPage() {
   const [claimedTokenId, setClaimedTokenId] = useState<string>('')
+  const [claimedEventId, setClaimedEventId] = useState<string>('')
   return (
     <div className="min-h-screen bg-[#1a1a4d] text-white relative overflow-hidden">
       <CircuitBackground />
@@ -55,7 +56,7 @@ export default function TiendaPage() {
           <div className="w-full max-w-md mt-6">
             <FuturisticCard>
               <div className="p-4">
-                <ClaimNFT onTokenClaimed={setClaimedTokenId} />
+                <ClaimNFT onTokenClaimed={setClaimedTokenId} onEventDetected={setClaimedEventId} />
               </div>
             </FuturisticCard>
           </div>
@@ -64,7 +65,7 @@ export default function TiendaPage() {
           <div className="w-full max-w-md mt-6">
             <FuturisticCard>
               <div className="p-4">
-                <UpgradeMerch prefilledTokenId={claimedTokenId} />
+                <UpgradeMerch prefilledTokenId={claimedTokenId} prefilledEventId={claimedEventId} />
               </div>
             </FuturisticCard>
           </div>

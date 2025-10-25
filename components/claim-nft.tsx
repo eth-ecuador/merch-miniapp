@@ -5,9 +5,11 @@ import { useWriteContract, useWaitForTransactionReceipt } from "wagmi"
 import { useBaseAccountUser } from "@/hooks/useBaseAccountUser"
 import { MERCH_MANAGER_ABI, MERCH_MANAGER_ADDRESS } from "@/lib/contracts"
 import { saveClaimedNFT, CollectedNFT } from "@/lib/nft-collection-storage"
+import { validateClaimCode } from "@/lib/code-validator"
 
 interface ClaimNFTProps {
   onTokenClaimed?: (tokenId: string) => void
+  onEventDetected?: (eventId: string) => void
 }
 
 interface ClaimResponse {
@@ -44,7 +46,7 @@ function getRandomMerchItem(walletAddress: string) {
   return BASIC_MERCH_ITEMS[randomIndex]
 }
 
-export function ClaimNFT({ onTokenClaimed }: ClaimNFTProps = {}) {
+export function ClaimNFT({ onTokenClaimed, onEventDetected }: ClaimNFTProps = {}) {
   const { address } = useBaseAccountUser()
   const { writeContract, data: hash, isPending } = useWriteContract()
   const { isLoading: isConfirming, isSuccess: isConfirmed, data: receipt } = useWaitForTransactionReceipt({
@@ -68,6 +70,23 @@ export function ClaimNFT({ onTokenClaimed }: ClaimNFTProps = {}) {
     setError(null)
 
     try {
+      // 🔍 Primero validar el código localmente
+      const codeValidation = validateClaimCode(claimCode.trim())
+      
+      if (!codeValidation.isValid) {
+        throw new Error(codeValidation.error || 'Código no válido')
+      }
+
+      console.log('✅ Código válido encontrado:', {
+        code: claimCode.trim(),
+        eventId: codeValidation.eventId,
+        eventName: codeValidation.eventName
+      })
+
+      // Llamar al callback para pasar el eventId al upgrade component
+      onEventDetected?.(codeValidation.eventId!)
+
+      // 🌐 Ahora verificar con el backend usando el eventId correcto
       const response = await fetch('https://merch-backend-ot7l.onrender.com/api/verify-code', {
         method: 'POST',
         headers: {
@@ -76,7 +95,8 @@ export function ClaimNFT({ onTokenClaimed }: ClaimNFTProps = {}) {
         },
         body: JSON.stringify({
           code: claimCode.trim(),
-          walletAddress: address
+          walletAddress: address,
+          eventId: codeValidation.eventId // Enviar el eventId correcto
         })
       })
 
@@ -94,9 +114,10 @@ export function ClaimNFT({ onTokenClaimed }: ClaimNFTProps = {}) {
       const assignedImage = getRandomMerchItem(address)
       console.log('🎨 Imagen asignada:', assignedImage.name, '->', assignedImage.image)
 
-      // Agregar imagen a los datos del claim
+      // Agregar imagen a los datos del claim y usar el eventId validado localmente
       const enhancedData = {
         ...data,
+        eventId: codeValidation.eventId, // Usar el eventId del código validado
         assignedImage
       }
 
