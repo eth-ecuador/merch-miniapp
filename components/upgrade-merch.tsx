@@ -37,12 +37,15 @@ export default function UpgradeMerch() {
     isPending 
   } = useWriteContract()
 
-  // Obtener el fee de upgrade
-  const { data: upgradeFee } = useReadContract({
+  // Obtener el fee de upgrade (con fallback hardcodeado)
+  const { data: contractUpgradeFee } = useReadContract({
     address: MERCH_MANAGER_ADDRESS,
     abi: MERCH_MANAGER_ABI,
     functionName: 'getUpgradeFee',
   })
+
+  // Upgrade fee hardcodeado como fallback (0.001 ETH)
+  const upgradeFee = contractUpgradeFee || parseEther('0.001')
 
   // EventId hardcodeado
   const eventId = '0x7da127c1c830d63313149007a57b7d87baba64ee21dadf57260d061532a0b1de'
@@ -79,32 +82,43 @@ export default function UpgradeMerch() {
     console.log('🎉 Premium NFT upgraded! Assigned image:', premiumItem.name)
   }
 
-  const handleUpgrade = async () => {
-    console.log('🔧 Debug upgrade button:')
+  const handleUpgrade = () => {
+    console.log('� Debug upgrade button clicked!')
     console.log('- tokenId:', tokenId)
     console.log('- address:', address)
     console.log('- upgradeFee:', upgradeFee)
     console.log('- isPending:', isPending)
     console.log('- isConfirming:', isConfirming)
+    console.log('- eventId:', eventId)
     
-    // Validaciones con mensajes específicos
+    // Validación específica para Base app
     if (!address) {
-      alert('Please connect your wallet first')
+      console.error('❌ No wallet address detected')
+      alert('Please connect your wallet first. If already connected, try refreshing the page.')
       return
     }
     
     if (!tokenId || tokenId.trim() === '') {
+      console.error('❌ No token ID provided')
       alert('Please enter a Token ID to upgrade')
       return
     }
-    
-    if (!upgradeFee) {
-      alert('Upgrade fee is still loading, please wait a moment')
-      return
-    }
+
+    console.log('✅ All validations passed, proceeding with upgrade...')
 
     try {      
-      await writeContract({
+      console.log('📝 Calling writeContract with:', {
+        address: MERCH_MANAGER_ADDRESS,
+        functionName: 'mintCompanionWithAttestation',
+        args: [
+          BigInt(tokenId),
+          address,
+          eventId
+        ],
+        value: upgradeFee
+      })
+      
+      writeContract({
         address: MERCH_MANAGER_ADDRESS,
         abi: MERCH_MANAGER_ABI,
         functionName: 'mintCompanionWithAttestation',
@@ -115,9 +129,12 @@ export default function UpgradeMerch() {
         ],
         value: upgradeFee
       })
+      
+      console.log('✅ writeContract called successfully')
     } catch (error) {
-      console.error('Error upgrading NFT:', error)
-      alert('Error upgrading NFT. Please try again.')
+      console.error('❌ Error upgrading NFT:', error)
+      const errorMessage = error instanceof Error ? error.message : 'Unknown error'
+      alert(`Error upgrading NFT: ${errorMessage}. Please try again.`)
     }
   }
 
