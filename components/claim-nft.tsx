@@ -173,10 +173,10 @@ export function ClaimNFT() {
     <div className="space-y-4">
       <div className="text-center mb-4">
         <h3 className="text-lg font-bold text-[#c8ff00] uppercase tracking-wider mb-1">
-          Reclamar NFT
+          CLAIM NFT
         </h3>
         <p className="text-xs text-white/60 uppercase tracking-wider">
-          Ingresa tu código de evento
+          Enter your event code
         </p>
       </div>
 
@@ -200,7 +200,7 @@ export function ClaimNFT() {
                 {claimData.assignedImage.name}
               </h4>
               <p className="text-xs text-white/70">
-                ¡Has obtenido este NFT!
+                You have obtained this NFT!
               </p>
             </div>
           )}
@@ -209,9 +209,9 @@ export function ClaimNFT() {
             <span className="text-2xl">🎉</span>
           </div>
           <div>
-            <p className="text-green-400 font-bold mb-2">¡NFT Reclamado Exitosamente!</p>
+            <p className="text-green-400 font-bold mb-2">NFT Claimed Successfully!</p>
             <p className="text-xs text-white/80">
-              Tu Soul Bound Token ha sido mintado
+              Your Soul Bound Token has been minted
             </p>
             {hash && (
               <div className="mt-3 space-y-2">
@@ -237,7 +237,7 @@ export function ClaimNFT() {
               onClick={resetForm}
               className="text-xs text-blue-400 hover:text-blue-300 underline transition-colors"
             >
-              ¿Canjear otro código?
+              Claim another code?
             </button>
           </div>
         </div>
@@ -265,10 +265,10 @@ export function ClaimNFT() {
             {isVerifying ? (
               <>
                 <div className="animate-spin w-4 h-4 border-2 border-black border-t-transparent rounded-full" />
-                Verificando...
+                Verifying...
               </>
             ) : (
-              'Verificar Código'
+              'Verify Code'
             )}
           </button>
         </div>
@@ -282,10 +282,10 @@ export function ClaimNFT() {
               <div className="w-4 h-4 bg-green-400 rounded-full flex items-center justify-center">
                 <span className="text-black text-xs font-bold">✓</span>
               </div>
-              <span className="text-green-400 text-sm font-bold">Código Válido</span>
+              <span className="text-green-400 text-sm font-bold">Valid code</span>
             </div>
             <p className="text-xs text-white/80">
-              {claimData.metadata?.name || 'NFT de Evento'}
+              {claimData.metadata?.name || 'Event NFT'}
             </p>
           </div>
 
@@ -293,7 +293,7 @@ export function ClaimNFT() {
           {claimData.assignedImage && (
             <div className="bg-[#c8ff00]/10 border border-[#c8ff00]/30 rounded-lg p-3">
               <p className="text-xs text-[#c8ff00] mb-3 uppercase tracking-wider text-center">
-                🎁 Tu NFT será:
+                 Your NFT will be:
               </p>
               <div className="flex items-center gap-3">
                 <div className="w-16 h-16 bg-white/10 rounded-lg overflow-hidden flex-shrink-0 border border-white/20">
@@ -323,7 +323,7 @@ export function ClaimNFT() {
               onClick={resetForm}
               className="flex-1 bg-white/10 text-white font-bold py-3 px-4 rounded-lg uppercase tracking-wider hover:bg-white/20 transition-colors"
             >
-              Cancelar
+              Cancel
             </button>
             <button
               onClick={mintNFT}
@@ -333,15 +333,15 @@ export function ClaimNFT() {
               {isPending ? (
                 <>
                   <div className="animate-spin w-4 h-4 border-2 border-black border-t-transparent rounded-full" />
-                  Confirmando...
+                  Confirming...
                 </>
               ) : isConfirming ? (
                 <>
                   <div className="animate-spin w-4 h-4 border-2 border-black border-t-transparent rounded-full" />
-                  Minteando...
+                  Minting...
                 </>
               ) : (
-                'Reclamar NFT'
+                'Claim NFT'
               )}
             </button>
           </div>
@@ -363,7 +363,7 @@ export function ClaimNFT() {
       {/* Info */}
       <div className="text-center">
         <p className="text-xs text-white/40">
-          Los códigos son proporcionados en eventos
+          Event codes are provided at events
         </p>
       </div>
     </div>

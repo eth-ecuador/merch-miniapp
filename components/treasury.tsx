@@ -31,8 +31,8 @@ export function Treasury() {
       setUserNFTs(collection)
       setStats(userStats)
       
-      console.log('📊 Colección cargada:', collection.length, 'NFTs')
-      console.log('📈 Estadísticas:', userStats)
+      console.log('📊 Collection loaded:', collection.length, 'NFTs')
+      console.log('📈 Stats:', userStats)
     } catch (error) {
       console.error('Error loading user collection:', error)
     } finally {
@@ -41,7 +41,7 @@ export function Treasury() {
   }
 
   const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleDateString('es-ES', {
+    return new Date(dateString).toLocaleDateString('en-US', {
       day: '2-digit',
       month: '2-digit',
       year: '2-digit',
@@ -58,11 +58,11 @@ export function Treasury() {
             🏛️ Treasury
           </h3>
           <p className="text-sm text-white/70 mb-4">
-            Tu colección personal de NFTs
+            Your personal NFT collection
           </p>
           <div className="bg-black/30 rounded-lg p-4">
             <p className="text-white/60 text-sm">
-              🔌 Conecta tu wallet para ver tu colección
+              🔌 Connect your wallet to view your collection
             </p>
           </div>
         </div>
@@ -79,7 +79,7 @@ export function Treasury() {
           </h3>
           <div className="flex items-center justify-center space-x-2">
             <div className="animate-spin w-4 h-4 border-2 border-purple-400 border-t-transparent rounded-full" />
-            <span className="text-white/70 text-sm">Cargando colección...</span>
+            <span className="text-white/70 text-sm">Loading collection...</span>
           </div>
         </div>
       </div>
@@ -93,7 +93,7 @@ export function Treasury() {
           🏛️ Treasury
         </h3>
         <p className="text-sm text-white/70">
-          Tu colección personal de NFTs
+          Your personal NFT collection
         </p>
       </div>
 
@@ -102,10 +102,10 @@ export function Treasury() {
           <div className="bg-black/30 rounded-lg p-6">
             <div className="text-4xl mb-3">📭</div>
             <p className="text-white/60 text-sm mb-2">
-              Aún no tienes NFTs en tu colección
+              You don't have any NFTs in your collection yet
             </p>
             <p className="text-white/40 text-xs">
-              ¡Reclama códigos para empezar tu colección!
+              Claim codes to start your collection!
             </p>
           </div>
         </div>
@@ -119,7 +119,7 @@ export function Treasury() {
             </div>
             {stats?.lastClaim && (
               <div className="flex justify-between items-center text-xs mt-1">
-                <span className="text-purple-400 font-medium">⏰ Último claim:</span>
+                <span className="text-purple-400 font-medium">⏰ Last claim:</span>
                 <span className="text-white/60">{formatDate(stats.lastClaim)}</span>
               </div>
             )}
@@ -159,7 +159,7 @@ export function Treasury() {
           {/* Contadores por tipo */}
           {stats?.itemCounts && Object.keys(stats.itemCounts).length > 0 && (
             <div className="bg-black/30 rounded-lg p-3">
-              <h4 className="text-purple-400 text-xs font-medium mb-2">📦 Por tipo:</h4>
+              <h4 className="text-purple-400 text-xs font-medium mb-2">📦 By type:</h4>
               <div className="space-y-1">
                 {Object.entries(stats.itemCounts).map(([itemName, count]) => (
                   <div key={itemName} className="flex justify-between items-center text-xs">
@@ -176,7 +176,7 @@ export function Treasury() {
             onClick={loadUserCollection}
             className="w-full bg-purple-500/20 text-purple-400 text-xs py-2 rounded hover:bg-purple-500/30 transition-colors"
           >
-            🔄 Actualizar colección
+            🔄 Refresh collection
           </button>
         </div>
       )}

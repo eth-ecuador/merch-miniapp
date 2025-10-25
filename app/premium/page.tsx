@@ -38,10 +38,10 @@ export default function PremiumPage() {
             {/* Catálogo completo disponible */}
             <div className="mb-4">
               <h3 className="text-sm font-bold text-white/80 uppercase tracking-wider mb-3 text-center">
-                📖 Catálogo completo
+                📖 Complete Catalog
               </h3>
               <p className="text-xs text-white/50 text-center mb-4">
-                Todos los items disponibles para reclamar
+                All available items to claim
               </p>
             </div>
 
